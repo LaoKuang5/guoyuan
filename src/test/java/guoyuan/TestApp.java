@@ -19,9 +19,6 @@ public class TestApp {
 	EmpService es;
 	@Test
 	public void test() {
-		List<Emp> emps=es.getAll();
-		for (Emp emp : emps) {
-			System.out.println(emp.getEname());
-		}
+		
 	}
 }

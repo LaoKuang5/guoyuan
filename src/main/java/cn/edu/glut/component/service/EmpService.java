@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.glut.model.Emp;
 
-@Service
+@Service(value="empService")
 public interface EmpService {
 	List<Emp> getAll();
 }
