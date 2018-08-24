@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -12,11 +13,15 @@ import org.apache.logging.log4j.core.tools.picocli.CommandLine.Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.HttpRequest;
 
 import cn.edu.glut.component.service.UserService;
+import cn.edu.glut.model.UserGrant;
+import cn.edu.glut.model.UserInfo;
 import cn.edu.glut.util.SendSMSCode;
 @Controller
 @RequestMapping(value="user")
@@ -58,19 +63,33 @@ public class UserAction {
 	}
 	
 	/**
-	 * 验证码先行 验证码匡 每次改变ajax请求验证  成功返回true 失败返回false
+	 * 验证码先行
+	 * @param smsCode
+	 * @param resp
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping(value="checkSMSCode")
-	public String checkSMSCode(@RequestParam(name="tel",required=true) String tel,@RequestParam(name="smsCode",required=true) String smsCode,HttpServletResponse resp,HttpSession session) {
+	public String checkSMSCode(@RequestParam(name="smsCode",required=true) String smsCode,HttpServletResponse resp,HttpSession session) {
 		try {
-			if(tel!=null&&smsCode!=null) {
-				if(tel.equals(session.getAttribute("tel"))&&smsCode.equals(session.getAttribute("checkCode"))) {
-					resp.getWriter().println("true");
-					return null;
-				}
+			//先验证是否发送了验证码
+			String tel=(String) session.getAttribute("tel");
+			if(tel==null) {
+				resp.getWriter().println("noTelephoneNumber");
+				//**********记录日志************
+				return null;
 			}
-			resp.getWriter().println("false");
+			//校验验证码页面对验证码进行非空验证
+			String checkCode=(String) session.getAttribute("checkCode");
+			if(smsCode!=null&&smsCode.equals(checkCode)) {
+				resp.getWriter().println("true");
+				//已通过手机号验证
+				session.setAttribute("validTelephone", true);
+				return null;
+			}else {
+				resp.getWriter().println("false");
+				return null;
+			}
 		}catch(IOException e) {
 			//****完善日志后加入日志 
 			e.printStackTrace();
@@ -79,7 +98,36 @@ public class UserAction {
 		return null;
 	}
 	
-	public String regist() {
-		return null;
+	/**
+	 * 注册功能账号是已验证的手机号 
+	 * 返回页面路径待定
+	 * @return
+	 */
+	@RequestMapping(value="regist")
+	public ModelAndView regist(@RequestParam(name="pwd",required=true)String pwd,HttpServletRequest request,HttpSession session) {
+		String tel=(String) session.getAttribute("tel");
+		if(tel==null) {
+			//不应该进到此处 记录日志
+			return null;
+		}
+		
+		//确保经过手机号验证
+		Boolean checked=(Boolean) session.getAttribute("validTelephone");
+		
+		//未经过手机号验证 正常情况不会出现 一旦出现记录日志
+		if(checked==null||!checked) {
+			//记录日志
+			return null;
+		}
+		
+		ModelAndView mv=new ModelAndView();
+		UserInfo user=new UserInfo();
+		UserGrant userGrant=new UserGrant();
+		
+		user.setIp(request.getLocalAddr());
+		
+		
+		
+		return mv;
 	}
 }
