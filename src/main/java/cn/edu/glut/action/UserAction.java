@@ -91,7 +91,7 @@ public class UserAction {
 				return null;
 			}
 		}catch(IOException e) {
-			//****完善日志后加入日志 
+			//****完善日志后加入日志 *******
 			e.printStackTrace();
 		}
 		
@@ -125,7 +125,7 @@ public class UserAction {
 		UserGrant userGrant=new UserGrant();
 		
 		//记录注册ip地址
-		user.setIp(request.getLocalAddr());
+		user.setIp(request.getRemoteAddr());
 		
 		//调用service 层通过ip地址查出地理位置  未完成
 		user.setTelephone(tel);
@@ -137,9 +137,17 @@ public class UserAction {
 		userGrant.setIdentifier(tel);
 		userGrant.setUser(user);
 		
+		
 		//调用service 进行注册
 		user=userService.regist(userGrant);
 		
+		if(user==null||user.getUserId()==null) {
+			//*******出错记录日志
+			System.out.println("出错了UserAction:line 145");
+		}
+		else {
+			System.out.println("成功了userId:"+user.getUserId());
+		}
 		return mv;
 	}
 }

@@ -13,6 +13,7 @@ import cn.edu.glut.component.dao.UserDao;
 import cn.edu.glut.component.service.EmpService;
 import cn.edu.glut.component.service.impl.EmpServiceImpl;
 import cn.edu.glut.model.Emp;
+import cn.edu.glut.model.UserGrant;
 import cn.edu.glut.model.UserInfo;
 @ContextConfiguration("/spring-common.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,6 +27,15 @@ public class TestApp {
 		UserInfo user=new UserInfo();
 		user.setTelephone("110");
 		u.addUserInfo(user);
+		
+		UserGrant ug=new  UserGrant();
+		ug.setUser(user);
+		ug.setLoginType("telephone");
+		u.addUserGrant(ug);
+		
+		if(ug.getUserGrantId()!=null) {
+			System.out.println(ug.getUserGrantId());
+		}
 		if(user.getUserId()==null) {
 			System.out.println(user);
 		}
