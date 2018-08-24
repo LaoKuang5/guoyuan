@@ -15,11 +15,17 @@ public class UserServiceIml implements UserService{
 	public boolean smsCode(String tel, String checkCode) {
 		try {
 			SendSmsResponse sendSms = SendSMSCode.sendSms(tel, checkCode);
+			if(sendSms!=null&&sendSms.getCode().equals("OK")) {
+				return true;
+			}
 		} catch (ClientException e) {
-			// TODO Auto-generated catch block
+			
+			//***完善日志功能后加入日志**********
 			e.printStackTrace();
 		}
 		return false;
 	}
+
+	
 	
 }

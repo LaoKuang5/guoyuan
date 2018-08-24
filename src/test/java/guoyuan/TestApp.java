@@ -19,6 +19,6 @@ public class TestApp {
 	EmpService es;
 	@Test
 	public void test() {
-		
+		System.out.println("");
 	}
 }

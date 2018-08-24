@@ -8,11 +8,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- 使用注解开发，不用配置controller，需要配置一个组件扫描器 -->
 	<context:component-scan
@@ -49,8 +49,9 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 注入数据库连接池 -->
 		<property name="dataSource" ref="dataSource" />
-		<!-- 配置MyBaties全局配置文件:mybatis-config.xml <property name="configLocation" 
-			value="classpath:mybatis-config.xml" /> -->
+		<!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+		<property name="configLocation" 
+			value="classpath:mybatis-config.xml" /> 
 		<!-- 扫描entity包 使用别名 -->
 		<property name="typeAliasesPackage" value="cn.edu.glut.model" />
 		<!-- 扫描sql配置文件:mapper需要的xml文件 -->
