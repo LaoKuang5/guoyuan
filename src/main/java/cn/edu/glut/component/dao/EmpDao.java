@@ -6,4 +6,6 @@ import cn.edu.glut.model.Emp;
 
 public interface EmpDao {
 	List<Emp> getAll();
+	
+	int addEmp(Emp emp);
 }

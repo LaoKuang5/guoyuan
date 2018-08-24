@@ -9,4 +9,5 @@ import cn.edu.glut.model.Emp;
 @Service(value="empService")
 public interface EmpService {
 	List<Emp> getAll();
+	int addEmp(Emp emp);
 }

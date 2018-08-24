@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.edu.glut.component.dao.UserDao">
+ 
+   <insert id="addUserInfo" parameterType="cn.edu.glut.model.UserInfo" keyProperty="userId" useGeneratedKeys="true">
+   	insert into user_info values(#{userId},#{telephone},#{nickname},#{identityNum},#{photo},#{state},#{address},#{ip})
+   </insert>
+
+
+	<insert id="addUserGrant" parameterType="cn.edu.glut.model.UserGrant" keyProperty="userGrantId" useGeneratedKeys="true">
+   	insert into user_grant values(#{userGrantId},#{user.userId},#{loginType},#{grantCode},#{identifier})
+   
+   </insert>
+</mapper>

@@ -1,0 +1,2 @@
+1.关于用户表state字段 0禁止登陆 1允许登陆
+2.登陆类型LoginType有telephone代表手机号的方式登陆

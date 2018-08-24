@@ -6,4 +6,8 @@
   <select id="getAll" resultType="cn.edu.glut.model.Emp">
     select * from emp
   </select>
+  
+  <insert id="addEmp" parameterType="cn.edu.glut.model.Emp" keyProperty="id" useGeneratedKeys="true">
+  	insert into emp values(#{id},#{ename},#{age})
+  </insert>
 </mapper>

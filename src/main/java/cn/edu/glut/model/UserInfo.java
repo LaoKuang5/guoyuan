@@ -5,28 +5,30 @@ package cn.edu.glut.model;
  *
  */
 public class UserInfo {
-	private int user_id;
+	private Integer userId;
 	
 	private String telephone;
 	
 	private String nickname;
 	
-	private String identity_num;
+	private String identityNum;
 	
 	private String photo;
 	
-	private int state;
+	private Integer state;
 	
 	private String  address;
 	
 	private String ip;
 
-	public int getUser_id() {
-		return user_id;
+	
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getTelephone() {
@@ -45,12 +47,14 @@ public class UserInfo {
 		this.nickname = nickname;
 	}
 
-	public String getIdentity_num() {
-		return identity_num;
+	
+
+	public String getIdentityNum() {
+		return identityNum;
 	}
 
-	public void setIdentity_num(String identity_num) {
-		this.identity_num = identity_num;
+	public void setIdentityNum(String identityNum) {
+		this.identityNum = identityNum;
 	}
 
 	public String getPhoto() {
@@ -61,11 +65,11 @@ public class UserInfo {
 		this.photo = photo;
 	}
 
-	public int getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
@@ -85,6 +89,7 @@ public class UserInfo {
 		this.ip = ip;
 	}
 
+	
 	
 	
 }

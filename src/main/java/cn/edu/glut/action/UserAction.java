@@ -124,9 +124,21 @@ public class UserAction {
 		UserInfo user=new UserInfo();
 		UserGrant userGrant=new UserGrant();
 		
+		//记录注册ip地址
 		user.setIp(request.getLocalAddr());
 		
+		//调用service 层通过ip地址查出地理位置  未完成
+		user.setTelephone(tel);
+		//用户状态 约定0禁止登陆 1允许登陆
+		user.setState(1);
 		
+		userGrant.setLoginType("telephone");
+		userGrant.setGrantCode(pwd);
+		userGrant.setIdentifier(tel);
+		userGrant.setUser(user);
+		
+		//调用service 进行注册
+		user=userService.regist(userGrant);
 		
 		return mv;
 	}

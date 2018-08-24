@@ -20,5 +20,10 @@ public class EmpServiceImpl implements EmpService{
 		
 		return empDao.getAll();
 	}
+	@Override
+	public int addEmp(Emp emp) {
+		
+		return empDao.addEmp(emp);
+	}
 		
 }
