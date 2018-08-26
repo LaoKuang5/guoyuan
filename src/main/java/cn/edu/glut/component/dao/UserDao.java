@@ -13,5 +13,9 @@ public interface UserDao {
 	Integer addUserInfo(UserInfo  user);
 	
 	Integer addUserGrant(UserGrant userGrant);
+
+	UserInfo getUserByTel(String tel);
+
+	UserGrant getUserGrantByTel(String tel);
 	
 }

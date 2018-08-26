@@ -22,5 +22,19 @@ public interface UserService {
 	 * @return
 	 */
 	UserInfo regist(UserGrant userGrant);
+
+	/**
+	 * 根据用户名查找用户
+	 * @param tel
+	 * @return
+	 */
+	UserInfo getUserByTel(String tel);
+
+	/**
+	 * 根据手机号查询用户授权
+	 * @param tel
+	 * @return
+	 */
+	UserGrant getUserGrantByTel(String tel);
 	
 }

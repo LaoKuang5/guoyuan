@@ -2,6 +2,8 @@ package cn.edu.glut.component.service.impl;
 
 import javax.annotation.Resource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
@@ -16,6 +18,7 @@ import cn.edu.glut.util.SendSMSCode;
 @Service("userService")
 public class UserServiceIml implements UserService{
 
+	Logger log=LogManager.getLogger();
 	@Resource
 	UserDao userDao;
 	
@@ -30,6 +33,7 @@ public class UserServiceIml implements UserService{
 			
 			//***完善日志功能后加入日志**********
 			e.printStackTrace();
+			log.error("ClientException",e);
 		}
 		return false;
 	}
@@ -43,6 +47,18 @@ public class UserServiceIml implements UserService{
 		
 		
 		return userGrant.getUser();
+	}
+
+	@Override
+	public UserInfo getUserByTel(String tel) {
+		
+		return userDao.getUserByTel( tel);
+	}
+
+	@Override
+	public UserGrant getUserGrantByTel(String tel) {
+		
+		return userDao.getUserGrantByTel(tel);
 	}
 
 	

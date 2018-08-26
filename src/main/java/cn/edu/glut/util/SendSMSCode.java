@@ -23,61 +23,62 @@ import java.util.UUID;
 
 /**
  * 工具类 调用阿里云api,发送短信验证码.使用此类必须在maven中添加json支持和阿里云api
+ * 
  * @author 于金彪
  *
  */
 public class SendSMSCode {
-	 //产品名称:云通信短信API产品,开发者无需替换
-    static final String product = "Dysmsapi";
-    //产品域名,开发者无需替换
-    static final String domain = "dysmsapi.aliyuncs.com";
+	// 产品名称:云通信短信API产品,开发者无需替换
+	static final String product = "Dysmsapi";
+	// 产品域名,开发者无需替换
+	static final String domain = "dysmsapi.aliyuncs.com";
 
-    // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "LTAIiXfxuhD2Pf6B";
-    static final String accessKeySecret = "ux20TvwQicFcc4RJhTzVLUizw4V3op";
-    
-    /**
-     * 发送短信验证码
-     * @param tel 接收验证码的手机号
-     * @param checkCode 校验码
-     * @return 返回 api调用结果
-     * @throws ClientException
-     */
-    public static SendSmsResponse sendSms(String tel ,String checkCode) throws ClientException {
+	// TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
+	static final String accessKeyId = "LTAIiXfxuhD2Pf6B";
+	static final String accessKeySecret = "ux20TvwQicFcc4RJhTzVLUizw4V3op";
 
-        //可自助调整超时时间
-        System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
-        System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+	/**
+	 * 发送短信验证码
+	 * 
+	 * @param tel       接收验证码的手机号
+	 * @param checkCode 校验码
+	 * @return 返回 api调用结果
+	 * @throws ClientException 阿里云短信验证码异常
+	 */
+	public static SendSmsResponse sendSms(String tel, String checkCode) throws ClientException {
 
-        //初始化acsClient,暂不支持region化
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-        DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
-        IAcsClient acsClient = new DefaultAcsClient(profile);
+		// 可自助调整超时时间
+		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
+		System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
-        //组装请求对象-具体描述见控制台-文档部分内容
-        SendSmsRequest request = new SendSmsRequest();
-        //必填:待发送手机号
-        request.setPhoneNumbers(tel);
-        //必填:短信签名-可在短信控制台中找到
-        request.setSignName("于金彪");
-        //必填:短信模板-可在短信控制台中找到
-        request.setTemplateCode("SMS_141145008");
-        //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        Random r=new Random();
-        //int a=r.nextInt(899999) +100000;
-        request.setTemplateParam("{\"code\":\""+checkCode+"\"}");
+		// 初始化acsClient,暂不支持region化
+		IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+		DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+		IAcsClient acsClient = new DefaultAcsClient(profile);
 
-        //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
-        //request.setSmsUpExtendCode("90997");
+		// 组装请求对象-具体描述见控制台-文档部分内容
+		SendSmsRequest request = new SendSmsRequest();
+		// 必填:待发送手机号
+		request.setPhoneNumbers(tel);
+		// 必填:短信签名-可在短信控制台中找到
+		request.setSignName("于金彪");
+		// 必填:短信模板-可在短信控制台中找到
+		request.setTemplateCode("SMS_141145008");
+		// 可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
+		Random r = new Random();
+		// int a=r.nextInt(899999) +100000;
+		request.setTemplateParam("{\"code\":\"" + checkCode + "\"}");
 
-        //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
-        request.setOutId("yourOutId");
+		// 选填-上行短信扩展码(无特殊需求用户请忽略此字段)
+		// request.setSmsUpExtendCode("90997");
 
-        //hint 此处可能会抛出异常，注意catch
-        SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
+		// 可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
+		request.setOutId("yourOutId");
 
-        return sendSmsResponse;
-    }
+		// hint 此处可能会抛出异常，注意catch
+		SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
 
+		return sendSmsResponse;
+	}
 
 }
