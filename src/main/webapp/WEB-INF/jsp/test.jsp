@@ -8,6 +8,7 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
+	<a href="${pageContext.request.contextPath }/commodity/list.action">查看商品列表</a>
 	<form >
 		<input id="tel" name="tel" type="tel"> <br>
 		<input id="checkSMSCode" name="checkSMSCode" type="number">
