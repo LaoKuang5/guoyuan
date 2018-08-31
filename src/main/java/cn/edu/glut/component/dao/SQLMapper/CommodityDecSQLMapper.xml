@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.glut.component.dao.CommodityDecDao">
+	<resultMap id="commodityDecMap" type="CommodityDec" >
+    	<id column="commodity_detai_id" property="commodityId" jdbcType="BIGINT" />
+    	<result column="commodity_desc" property="commodityDesc" jdbcType="CLOB" />
+   </resultMap>
+   <insert id="insertCommodityDec" parameterType="CommodityDec">
+   		INSERT INTO commodity_detail(commodity_detai_id,commodity_desc) VALUES(#{commodityId},#{commodityDesc})
+   </insert>
+   <select id="selectCommodityDecById" parameterType="Long" resultType="String">
+   		SELECT commodity_desc FROM commodity_detail WHERE commodity_detai_id = #{commodityID};
+   </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.glut.component.dao.CommodityDao" >
+  <resultMap id="commodityMap" type="Commodity" >
+    <id column="commodity_id" property="commodityId" jdbcType="BIGINT" />
+    <result column="cid" property="cid" jdbcType="BIGINT" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_term" property="commodityTerm" jdbcType="INTEGER" />
+    <result column="commodity_num" property="commodityNum" jdbcType="INTEGER" />
+    <result column="commodity_video_url" property="commodityVideoUrl" jdbcType="VARCHAR" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DECIMAL" />
+    <result column="commodity_product" property="commodityProduct" jdbcType="VARCHAR" />
+    <result column="commodity_status" property="commodityStatus" jdbcType="INTEGER" />
+    <result column="commodity_main_pho" property="commodityMainPho" jdbcType="VARCHAR" />
+    <result column="commodity_sub_pho1" property="commoditySubPho1" jdbcType="VARCHAR" />
+    <result column="commodity_sub_pho2" property="commoditySubPho2" jdbcType="VARCHAR" />
+    <result column="commodity_sub_pho3" property="commoditySubPho3" jdbcType="VARCHAR" />
+    <result column="commodity_sub_pho4" property="commoditySubPho4" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 输出商品列表信息对应的bean (kuang) -->
+  <resultMap id="commodityListVoMap" type="CommodityListVo" >
+  	<id column="commodity_id" property="commodityId" jdbcType="BIGINT" />
+  	<result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_term" property="commodityTerm" jdbcType="INTEGER" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="DECIMAL" />
+    <result column="commodity_product" property="commodityProduct" jdbcType="VARCHAR" />
+    <result column="commodity_status" property="commodityStatus" jdbcType="INTEGER" />
+    <result column="commodity_main_pho" property="commodityMainPho" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectCommodityList" resultMap="commodityListVoMap">
+	SELECT 
+	commodity_id,
+	commodity_name,
+	commodity_price,
+	commodity_term,
+	commodity_main_pho,
+	commodity_status,
+	commodity_product 
+	FROM commodity_info 
+  </select>
+  <insert id="insertCommodity" parameterType="Commodity">
+  	INSERT INTO commodity_info 
+  	VALUES(#{commodityId},#{cid},#{commodityName},#{commodityTerm},#{commodityNum},#{commodityVideoUrl},#{commodityPrice},#{commodityProduct},#{commodityStatus},#{commodityMainPho},#{commoditySubPho1},#{commoditySubPho2},#{commoditySubPho3},#{commoditySubPho4});
+  </insert>
+  <select id="selectCommodityById" parameterType="Long" resultMap="commodityMap">
+  	SELECT * FROM commodity_info WHERE commodity_id = #{commodityId}
+  </select>
+</mapper>
