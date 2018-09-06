@@ -1,0 +1,261 @@
+#registerTable td{
+	padding: 5px;
+}
+
+#registerBtn{
+	margin-left: 40%;
+}
+
+#loginTable td{
+	padding: 5px;
+}
+
+#loginBtn{
+	margin-left: 35%;
+}
+
+#bottomNavTable{
+	width: 100%;
+	position: fixed;
+	bottom:0;
+}
+
+#bottomNavTable td{
+	text-align: center;
+}
+
+.bottomNavIcon{
+	height: 30px;
+}
+
+.treeListTitle{
+	margin-bottom: 50px;
+}
+
+.treeListDiv{
+	padding: 10px;
+}
+
+.treeListImg{
+	width: 100px;
+}
+
+#buyMesFruitImg{
+	height: 180px;
+	border-radius:10px;
+}
+
+#buyMesDiv{
+	padding: 10px;
+}
+
+#buyMesTable{
+	width: 98%;
+}
+
+.buyMesIcon{
+	width:25px;
+}
+
+#buyMesNumber{
+	width: 80px;
+	height: 34px;
+}
+
+.fruitMoreMess{
+	text-align: center;
+}
+
+#buyMesFruitTableRight{
+	text-align: right;
+}
+
+#buyMesEnsure{
+	text-align: center;
+}
+
+#ensureMesAddressDiv{
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+#ensureMesTreeDiv{
+	text-align: center;
+	margin: 10px;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+#ensureMesTreeDiv p{
+	margin-bottom: 0px;
+}
+
+.MesTableRight{
+	text-align: right;
+}
+
+#ensureMesBtn{
+	margin-right: 10px;
+	text-align: right;
+}
+
+#videoImg{
+	width: 100%;
+	padding: 5px;
+}
+
+.videoIcon{
+	height: 30px;
+}
+
+#videoTable{
+	width: 100%;
+	text-align: center;
+}
+
+#myTreeListTitle{
+	text-align: center;
+	margin: 5px;
+}
+
+.myTreeList{
+	margin: 20px 4px;
+	text-align: center;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+.myTreeList p{
+	margin: 5px;
+}
+
+#fruitStsteImg{
+	padding: 20px;
+	width: 100%;
+}
+
+#fruitStsteTitle{
+	font: "微软雅黑";
+	font-size: 20px;
+}
+
+#fruitStsteDiv div{
+	text-align: center;
+	
+}
+
+#fruitStsteDiv{
+	margin: 0px 20px;
+	text-align: center;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+#fruitStsteEnvariment{
+	margin-top: 40px;
+	text-align: center;
+}
+
+.fruitStsteEnvarimentIcon{
+	height: 40px;
+	margin-bottom: 5px;
+}
+
+#fruitStsteEnvarimentArea{
+	margin-top: 30px;
+	text-align: right;
+}
+
+#logisticsMesDiv{
+	margin: 0px 10px;
+	padding: 5px;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+#logisticsMesDiv p{
+	margin: 3px;
+}
+
+#logisticsMesDivLoading{
+	margin: 0px 10px;
+	padding: 5px;
+	border: 1px solid gray;
+	border-radius: 4px;
+}
+
+#logisticsMesDivLoading p{
+	margin: 10px;
+}
+
+#logisticsMesTitle{
+	margin: 10px;
+	font: "微软雅黑";
+	font-size: 20px;
+}
+
+.touch{
+	margin:0px 10px;
+}
+
+.fruitGardenArea{
+	width: 30%;
+	float: left;
+	border-radius: 4px;
+	padding: 30px;
+}
+
+.fruitGardenArea p{
+	margin: 0px;
+}
+
+#fruitGardenAreaDiv div{
+	text-align: center;
+	border: 1px solid cadetblue;
+	margin: 5px;
+}
+
+#moneyIcon{
+	width: 20px;
+	height: 20px;
+}
+
+.head{
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	background-image:url(../img/阿布.jpg);
+}
+
+#sumMoneyBottom{
+	border: none;
+}
+
+#headDiv{
+	text-align: center;
+	width: 95%;
+	height: 120px;
+	background: gray;
+	margin: 8px auto;
+	border-radius: 5px;
+}
+
+.myIcon{
+	width: 60px;
+}
+
+.myNavIconFirst{
+	width: 100%;
+	text-align: center;
+	margin-top: 80px;
+}
+.myNavIconFirst td{
+	padding: 10px;
+}
+
+.MesTableRight{
+	width: 70%;
+	text-align: right;
+}
