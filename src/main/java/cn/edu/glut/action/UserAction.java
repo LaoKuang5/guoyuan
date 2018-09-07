@@ -125,7 +125,7 @@ public class UserAction {
 	
 	
 	/**
-	 * 注册功能账号是已验证的手机号
+	 * 注册功能账号  是已验证的手机号
 	 * 
 	 * @param pwd     密码
 	 * @param request
@@ -166,17 +166,18 @@ public class UserAction {
 
 		userGrant.setLoginType("telephone");
 		userGrant.setGrantCode(pwd);
+		//身份码
 		userGrant.setIdentifier(tel);
-		userGrant.setUser(user);
 
 		// 调用service 进行注册
-		user = userService.regist(userGrant);
+		user = userService.regist(userGrant,user);
 
 		if (user == null || user.getUserId() == null) {
 			// *******出错记录日志
 			log.error("用户注册失败:"+tel);
 		} else {
-			//注册成功 修改视图
+			//注册成功 修改视图返回首页
+			mv.setViewName("home");
 		}
 		return mv;
 	}
@@ -195,22 +196,23 @@ public class UserAction {
 		UserGrant userGrant=userService.getUserGrantByTel(tel);
 		if(userGrant==null) {
 			//手机号为空 返回error  修改视图
-			mv.setViewName("");
-			mv.addObject("error", "");
+			mv.setViewName("login");
+			mv.addObject("error", "手机号错误");
 			System.out.println("手机号错误");
 			return mv;
 		}else {
 			if(userGrant.getGrantCode().equals(pwd)) {
-				mv.setViewName("");
-				mv.addObject("ok", "");
+				mv.setViewName("home");
+				mv.addObject("ok", "success");
 				System.out.println("登陆成功");
 				//信息添加到session
+				session.setAttribute("user",userService.getUserByTel(tel));
 				//这里 返回
 				return mv;
 			}else {
 				//修改视图
-				mv.setViewName("");
-				mv.addObject("error", "");
+				mv.setViewName("login");
+				mv.addObject("error", "密码错误");
 				System.out.println("密码错误");
 				//这里 返回
 				return mv;
@@ -220,4 +222,24 @@ public class UserAction {
 		
 	}
 
+	/**
+	 * 短信验证码登录方式
+	 * @param tel 手机号
+	 * @param SMSCode 短信验证码
+	 * @return
+	 */
+	public ModelAndView loginBySMS(@RequestParam(name="tel") String tel,@RequestParam(name="SMSCode") String SMSCode) {
+		return null;
+	}
+
+	/**
+	 * 返回主页
+	 * @return
+	 */
+	@RequestMapping("home")
+	public String home() {
+		
+		return "home";
+	}
+	
 }

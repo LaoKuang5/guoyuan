@@ -7,9 +7,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="css/banner.css" />
-		<script src="js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>
@@ -53,7 +53,7 @@
 
 					</div>
 				</form>
-				<a href="address.html"><input type="button" id="addAddressSave" value="保存" /> </a>
+				<a href="${pageContext.request.contextPath}/address.action"><input type="button" id="addAddressSave" value="保存" /> </a>
 			</div>
 		</div>
 

@@ -1,5 +1,8 @@
 package cn.edu.glut.component.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.logging.log4j.LogManager;
@@ -39,14 +42,16 @@ public class UserServiceIml implements UserService{
 	}
 
 	@Override
-	public UserInfo regist(UserGrant userGrant) {
+	public UserInfo regist(UserGrant userGrant , UserInfo user) {
 		//调用dao层保存,先保存userinfo,再保存userGrant
-		userDao.addUserInfo(userGrant.getUser());
+		userDao.addUserInfo(user);
 		userDao.addUserGrant(userGrant);
+		List<UserGrant> grants=new ArrayList<>();
+		grants.add(userGrant);
+		user.setGrants(grants);
 		
 		
-		
-		return userGrant.getUser();
+		return user;
 	}
 
 	@Override

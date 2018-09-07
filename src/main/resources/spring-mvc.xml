@@ -5,7 +5,7 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="  
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd 
@@ -15,24 +15,16 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd 
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task.xsd">
- 
+
 	<!-- 使用注解开发，不用配置controller，需要配置一个组件扫描器 -->
 	<context:component-scan
 		base-package="cn.edu.glut.action" />
-		
+
 	<mvc:annotation-driven />
-	
-	<!-- 数据类型转换 支持
-		<mvc:message-converters>
-		
-			<bean
-				class="org.springframework.http.converter.StringHttpMessageConverter" />
-			
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
-		 
-		</mvc:message-converters>
--->
+
+	<!-- 数据类型转换 支持 <mvc:message-converters> <bean class="org.springframework.http.converter.StringHttpMessageConverter" 
+		/> <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" 
+		/> </mvc:message-converters> -->
 
 
 	<!-- 视图解析器 -->
@@ -44,25 +36,32 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	<!-- 配置图片上传 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置文件上传大小 -->
 		<property name="maxUploadSize" value="5000000" />
-		 <property name="maxInMemorySize">    
-            <value>4096</value>    
-        </property>   
-        <property name="defaultEncoding">  
-            <value>utf-8</value>  
-        </property>  
-	</bean>
-
-	<!-- 数据类型转换支持  用到再说
-	<bean id="cs"
-		class="org.springframework.context.support.ConversionServiceFactoryBean">
-		<property name="converters">
-			<list>
-				<bean class="org.lanqiao.converter.String2Date"></bean>
-			</list>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+		<property name="defaultEncoding">
+			<value>utf-8</value>
 		</property>
 	</bean>
-	-->
+
+
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/common/*"/>
+			<mvc:exclude-mapping path="/index.jsp"/>
+			<mvc:exclude-mapping path="/common/login.action"/>
+			<mvc:exclude-mapping path="/common/home.action"/>
+			<bean class="cn.edu.glut.interceptor.LoginCheck"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 数据类型转换支持 用到再说 <bean id="cs" class="org.springframework.context.support.ConversionServiceFactoryBean"> 
+		<property name="converters"> <list> <bean class="org.lanqiao.converter.String2Date"></bean> 
+		</list> </property> </bean> -->
 </beans>

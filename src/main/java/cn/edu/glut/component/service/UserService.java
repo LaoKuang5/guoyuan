@@ -21,7 +21,7 @@ public interface UserService {
 	 * @param userGrant
 	 * @return
 	 */
-	UserInfo regist(UserGrant userGrant);
+	UserInfo regist(UserGrant userGrant,UserInfo user);
 
 	/**
 	 * 根据用户名查找用户

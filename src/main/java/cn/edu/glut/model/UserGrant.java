@@ -8,7 +8,7 @@ public class UserGrant {
 	private Integer userGrantId;
 	
 	//此处对应表中 属性UserId
-	private UserInfo user;
+	private Integer userId;
 	
 	//登录类型 手机号 QQ 微信....
 	private String loginType;
@@ -26,12 +26,14 @@ public class UserGrant {
 		this.userGrantId = userGrantId;
 	}
 
-	public UserInfo getUser() {
-		return user;
+	
+
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser(UserInfo user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getLoginType() {

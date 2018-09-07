@@ -7,9 +7,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>登录</title>
-		<script src="js/mui.min.js"></script>
-		<link href="css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="css/fruitLuck.css" />
+		<script src="${pageContext.request.contextPath}/js/mui.min.js"></script>
+		<link href="${pageContext.request.contextPath}/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fruitLuck.css" />
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>

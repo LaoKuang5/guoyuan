@@ -18,7 +18,7 @@ import cn.edu.glut.model.CommodityListVo;
 import cn.edu.glut.util.ServerResponse;
 
 @Controller
-@RequestMapping("/commodity")
+@RequestMapping("/common")
 public class CommodityAction {
 	
 	@Resource(name="commodityService")

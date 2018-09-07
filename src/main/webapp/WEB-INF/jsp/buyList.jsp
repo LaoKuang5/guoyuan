@@ -7,9 +7,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>我的果园列表</title>
-		<script src="js/mui.min.js"></script>
-		<link href="css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="css/fruitLuck.css" />
+		<script src="${pageContext.request.contextPath}/js/mui.min.js"></script>
+		<link href="${pageContext.request.contextPath}/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fruitLuck.css" />
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
@@ -27,18 +27,18 @@
         	描述：底部选项卡
         -->
 		<nav class="mui-bar mui-bar-tab">
-			<a id="defaultTab" class="mui-tab-item mui-active" href="home.html">
-				<img id="homeIcon" class="bottomNavIcon" src="img/资源 14-100.jpg" />
+			<a id="defaultTab" class="mui-tab-item mui-active" href="${pageContext.request.contextPath}/common/home.action">
+				<img id="homeIcon" class="bottomNavIcon" src="${pageContext.request.contextPath}/img/资源 14-100.jpg" />
 			</a>
-			<a class="mui-tab-item" href="video.html">
-				<img id="videoIcon" class="bottomNavIcon" src="img/资源 10-100.jpg" />
+			<a class="mui-tab-item" href="${pageContext.request.contextPath}/common/video.action">
+				<img id="videoIcon" class="bottomNavIcon" src="${pageContext.request.contextPath}/img/资源 10-100.jpg" />
 			</a>
 			<a class="mui-tab-item" href="buyList.html">
-				<img id="buyIcon" class="bottomNavIcon " src="img/资源 11-100.jpg" />
+				<img id="buyIcon" class="bottomNavIcon " src="${pageContext.request.contextPath}/img/资源 11-100.jpg" />
 				<span class="mui-badge mui-badge-success">12</span>
 			</a>
-			<a class="mui-tab-item" href="my.html">
-				<img id="myIcon" class="bottomNavIcon" src="img/资源 13-100.jpg" />
+			<a class="mui-tab-item" href="${pageContext.request.contextPath}/common/my.action">
+				<img id="myIcon" class="bottomNavIcon" src="${pageContext.request.contextPath}/img/资源 13-100.jpg" />
 			</a>
 		</nav>
 

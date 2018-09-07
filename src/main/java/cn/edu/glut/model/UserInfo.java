@@ -1,4 +1,7 @@
 package cn.edu.glut.model;
+
+import java.util.List;
+
 /**
  * 实体类
  * @author jones
@@ -20,8 +23,19 @@ public class UserInfo {
 	private String  address;
 	
 	private String ip;
-
 	
+	private List<UserGrant> grants;
+	
+	
+	
+
+	public List<UserGrant> getGrants() {
+		return grants;
+	}
+
+	public void setGrants(List<UserGrant> grants) {
+		this.grants = grants;
+	}
 
 	public Integer getUserId() {
 		return userId;
