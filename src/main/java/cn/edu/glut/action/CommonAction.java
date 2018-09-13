@@ -54,4 +54,8 @@ public class CommonAction {
 		System.out.println("轻轻地我来过");
 		return "login";
 	}
+	@RequestMapping("regist")
+	public String regist() {
+		return "register";
+	}
 }

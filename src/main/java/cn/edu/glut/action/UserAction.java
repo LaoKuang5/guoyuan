@@ -2,6 +2,7 @@ package cn.edu.glut.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -47,15 +48,22 @@ public class UserAction {
 	 */
 	@RequestMapping(value = "smsCode")
 	public String smsCode(@RequestParam(name = "tel", required = true) String tel,
-			@RequestParam(name = "regist") String regist, HttpServletResponse response, HttpSession session) {
+			@RequestParam(name = "regist", required = false) String regist, HttpServletResponse response, HttpSession session) {
 		// 设置response 文本类型
 		response.setContentType("text/html;charset=utf-8");
 		try {
 			// 如果是注册先判断手机号
+			UserInfo user = userService.getUserByTel(tel);
+			
 			if (regist != null && regist.contains("true")) {
-				UserInfo user = userService.getUserByTel(tel);
 				if (user != null) {
 					response.getWriter().println("1001");
+					return null;
+				}
+			}else {
+				//登录没账号
+				if(user==null) {
+					response.getWriter().println("1002");
 					return null;
 				}
 			}
@@ -72,8 +80,10 @@ public class UserAction {
 			if (flag) {
 				session.setAttribute("tel", tel);
 				session.setAttribute("checkCode", String.valueOf(checkCode));
+				System.out.println(checkCode);
 				pw.println("true");
 			} else {
+				
 				pw.print("false");
 			}
 		} catch (IOException e) {
@@ -110,6 +120,7 @@ public class UserAction {
 				resp.getWriter().println("true");
 				// 已通过手机号验证
 				session.setAttribute("validTelephone", true);
+				
 				return null;
 			} else {
 				resp.getWriter().println("false");
@@ -193,33 +204,25 @@ public class UserAction {
 	@RequestMapping(value="login")
 	public ModelAndView login(@RequestParam(name="tel") String tel,@RequestParam(name="pwd") String pwd,HttpSession session) {
 		ModelAndView mv=new ModelAndView();
-		UserGrant userGrant=userService.getUserGrantByTel(tel);
-		if(userGrant==null) {
-			//手机号为空 返回error  修改视图
-			mv.setViewName("login");
-			mv.addObject("error", "手机号错误");
-			System.out.println("手机号错误");
-			return mv;
-		}else {
-			if(userGrant.getGrantCode().equals(pwd)) {
-				mv.setViewName("home");
-				mv.addObject("ok", "success");
-				System.out.println("登陆成功");
-				//信息添加到session
-				session.setAttribute("user",userService.getUserByTel(tel));
-				//这里 返回
-				return mv;
-			}else {
-				//修改视图
-				mv.setViewName("login");
-				mv.addObject("error", "密码错误");
-				System.out.println("密码错误");
-				//这里 返回
-				return mv;
-			}
-			
-		}
+		UserInfo user = userService.getUserByTel(tel);
+		List<UserGrant> grants=user.getGrants();
 		
+		for(UserGrant grant:grants) {
+			if("telephone".equals(grant.getLoginType())) {
+				//找到密码的授权方式
+				if(pwd.equals(grant.getGrantCode())) {
+					//密码匹配成功
+					session.setAttribute("user", user);
+					return null;
+				}else {
+					//密码错误
+					return null;
+				}
+			}
+		}
+		//找出授权方式为telephone  的授权
+		
+		return null;
 	}
 
 	/**
@@ -228,8 +231,23 @@ public class UserAction {
 	 * @param SMSCode 短信验证码
 	 * @return
 	 */
-	public ModelAndView loginBySMS(@RequestParam(name="tel") String tel,@RequestParam(name="SMSCode") String SMSCode) {
-		return null;
+	@RequestMapping("loginBySMS")
+	public ModelAndView loginBySMS(@RequestParam(name="tel") String tel,@RequestParam(name="SMSCode") String SMSCode,HttpSession session){
+		if(tel==null||tel.trim().equals("")) {
+			log.error("登陆异常，手机号码为空");
+			return null;
+		}
+		ModelAndView result=new ModelAndView();
+		if(tel.equals(session.getAttribute("tel"))&&(Boolean)session.getAttribute("validTelephone")) {
+			UserInfo user=userService.getUserByTel(tel);
+			result.setViewName("my");
+			session.setAttribute("user", user);
+		}else {
+			log.error("登陆错误，未通过验证");
+			result.setViewName("my");
+		}
+		
+		return result;
 	}
 
 	/**

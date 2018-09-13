@@ -53,10 +53,8 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/common/*"/>
-			<mvc:exclude-mapping path="/index.jsp"/>
-			<mvc:exclude-mapping path="/common/login.action"/>
-			<mvc:exclude-mapping path="/common/home.action"/>
+			<mvc:mapping path="/common/my.action"/>
+			
 			<bean class="cn.edu.glut.interceptor.LoginCheck"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

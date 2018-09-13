@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+    pageEncoding="utf-8" isELIgnored="false"%>
     <!DOCTYPE html>
 <html>
 
@@ -8,39 +8,58 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>登录</title>
 		<script src="${pageContext.request.contextPath}/js/mui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/login.js"></script>
 		<link href="${pageContext.request.contextPath}/css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fruitLuck.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
 	</head>
 
 	<body>
-		<!--
-    	作者：abusuper@outlook.com
-    	时间：2018-08-24
-    	描述：登录 - abu
-    -->
+		<section class="mui-content">
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1" onclick="setM(1)">
+						短信登录
+					</a>
+					<a class="mui-control-item" href="#item2"  onclick="setM(2)">
+						密码登录
+					</a>
+				</div>
+			</div>
 
-		<table id="loginTable">
-			<tr>
-				<td>
-					<p>用户名：</p>
-				</td>
-				<td>
-					<input id="loginName" type="text" placeholder="请输入注册手机号码" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p>密码：</p>
-				</td>
-				<td>
-					<input id="loginPassword" type="password" placeholder="请输入6-12位密码" />
-				</td>
-			</tr>
-		</table>
-		<input id="loginBtn" type="button" value="登录" />
+			<div id="item1" class="mui-control-content mui-active">
+				<form id="sms" action="${pageContext.request.contextPath}/user/loginBySMS.action" method="post" class="mui-input-group mui-table-view" onsubmit="return login(this)">
+							<div class="mui-input-row">
+								<label for="tel1">手机号</label>
+								<input id="tel1" name="tel" type="tel" class="mui-input-clear" />
+							</div>
+							<div class="mui-input-row">
+								<label for="">验证码</label>
+								<input id="smsCode" name="SMSCode" type="text" class="mui-input" />
+								<button id="sendCode" class="mui-btn mui-btn-primary" style="float:right;width:30%;" onClick="return getCheckCode(this)">发送验证码</button>
+							</div>
+							<button id="btn-login" type="submit" class="mui-btn mui-btn-primary mui-btn-block"  >登录</button>
+						</form>
+			</div>
+
+			<div id="item2" class="mui-control-content " onsubmit="return check()">
+				<form  action="/guoyuan/user/login.action" class="mui-input-group" method="post">
+							<div class="mui-input-row">
+								<label for="tel2">手机号</label>
+								<input id="tel2" name="tel" type="tel" class="mui-input-clear" />
+							</div>
+							<div class="mui-input-row">
+								<label for="">密码</label>
+								<input id="pwd" name="pwd" type="text" class="mui-input-clear" />
+							</div>
+							<button  type="submit" class="mui-btn mui-btn-primary mui-btn-block" > 登录</button>
+						</form>
+			</div>
+		</section>
+		<a href="/guoyuan/common/regist.action" id="gotoregist">快速注册</a>
 	</body>
 
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.catalina.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,9 @@ public class UserServiceIml implements UserService{
 	
 	@Override
 	public boolean smsCode(String tel, String checkCode) {
+		SendSmsResponse sendSms=null;
 		try {
-			SendSmsResponse sendSms = SendSMSCode.sendSms(tel, checkCode);
+			sendSms = SendSMSCode.sendSms(tel, checkCode);
 			if(sendSms!=null&&sendSms.getCode().equals("OK")) {
 				return true;
 			}
@@ -37,6 +39,9 @@ public class UserServiceIml implements UserService{
 			//***完善日志功能后加入日志**********
 			e.printStackTrace();
 			log.error("ClientException",e);
+		}
+		if(sendSms!=null) {
+			log.error("短信发送失败"+sendSms.getCode()+"#"+sendSms.getMessage());
 		}
 		return false;
 	}
@@ -56,8 +61,21 @@ public class UserServiceIml implements UserService{
 
 	@Override
 	public UserInfo getUserByTel(String tel) {
-		
-		return userDao.getUserByTel( tel);
+		UserInfo user =userDao.getUserByTel( tel);
+		List<UserGrant> grants=null;
+		if(user==null) {
+			//未注册 记录日志
+			return null;
+		}else {
+			//已注册
+			grants=user.getGrants();
+		}
+		if(grants==null||grants.size()==0) {
+			//出错 由用户没有授权方式
+			//记录日志
+			return null;
+		}
+		return user;
 	}
 
 	@Override

@@ -4,10 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="cn.edu.glut.component.dao.UserDao">
  
- 	<resultMap type="cn.edu.glut.model.UserGrant" id="grant" autoMapping="true"  >
- 		<association property="user" autoMapping="true" javaType="cn.edu.glut.model.UserInfo"></association>
+ 	<resultMap type="cn.edu.glut.model.UserInfo" id="user" autoMapping="true"  >
+ 		<collection property="grants" autoMapping="true" ofType="cn.edu.glut.model.UserGrant" >
+ 		<id property="userGrantId" column="user_grant_id"/>
+ 		</collection>
  	</resultMap>
- 
+  
    <insert id="addUserInfo" parameterType="cn.edu.glut.model.UserInfo" keyProperty="userId" useGeneratedKeys="true">
    	insert into user_info values(#{userId},#{telephone},#{nickname},#{identityNum},#{photo},#{state},#{address},#{ip})
    </insert>
@@ -17,11 +19,29 @@
    	insert into user_grant values(#{userGrantId},#{user.userId},#{loginType},#{grantCode},#{identifier})
    </insert>
    
-   <select id="getUserByTel" parameterType="String" resultType="cn.edu.glut.model.UserInfo" >
-   	select * from user_info where telephone=#{tel}
+   <select id="getUserByTel" parameterType="String" resultMap="user" >
+   	SELECT
+	user_info.user_id,
+	telephone,
+	nickname,
+	identity_num,
+	photo,
+	state,
+	address,
+	ip,
+	user_grant_id,
+	login_type,
+	grant_code,
+	identifier 
+FROM
+	user_info,
+	user_grant 
+WHERE
+	user_info.user_id = user_grant.user_id 
+	AND telephone = #{tel}
    </select>
-   
-   <select id="getUserGrantByTel" parameterType="String" resultMap="grant" >
+   <!-- emm -->
+   <select id="getUserGrantByTel" parameterType="String" resultMap="user" >
    	SELECT
 	user_grant_id,
 	user_info.user_id,

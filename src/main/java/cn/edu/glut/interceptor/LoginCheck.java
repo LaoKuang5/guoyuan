@@ -18,7 +18,7 @@ public class LoginCheck implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("拦截器:"+request.getPathInfo());
+		System.out.println("拦截器:"+request.getServletPath());
 		UserInfo user=(UserInfo) request.getSession().getAttribute("user");
 		if(user==null) {
 			//未登录 返回登录页面
